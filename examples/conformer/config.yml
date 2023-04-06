@@ -24,9 +24,9 @@ speech_config:
   normalize_per_frame: False
 
 decoder_config:
-  vocabulary: ./vocabularies/librispeech/librispeech_train_4_1030.subwords
-  target_vocab_size: 1000
-  max_subword_length: 10
+  vocabulary: ./vocabularies/librispeech/conformer.subwords
+  target_vocab_size: 1024
+  max_subword_length: 4
   blank_at_zero: True
   beam_width: 0
   norm_score: True
@@ -86,7 +86,7 @@ learning_config:
   eval_dataset_config:
     use_tf: True
     data_paths:
-      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/dev-clean/transcripts.tsv
+      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/dev-clean/transcripts_q.tsv
     tfrecords_dir: null
     shuffle: False
     cache: True
@@ -112,8 +112,8 @@ learning_config:
     epsilon: 1e-9
 
   running_config:
-    batch_size: 2
-    num_epochs: 50
+    batch_size: 4
+    num_epochs: 5
     checkpoint:
       filepath: D:/Models/local/conformer/checkpoints/{epoch:02d}.h5
       save_best_only: False

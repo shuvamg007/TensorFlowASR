@@ -26,11 +26,11 @@ from tensorflow_asr.models.transducer.conformer import Conformer
 from tensorflow_asr.optimizers.schedules import TransformerSchedule
 
 
-DEFAULT_YAML = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
+# DEFAULT_YAML = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
 
 
 def main(
-    config: str = DEFAULT_YAML,
+    config: str = 'config.yml',
     tfrecords: bool = False,
     sentence_piece: bool = False,
     subwords: bool = True,
@@ -45,6 +45,7 @@ def main(
     tf.keras.backend.clear_session()
     tf.config.optimizer.set_experimental_options({"auto_mixed_precision": mxp})
     strategy = env_util.setup_strategy(devices)
+    config = os.path.join(os.path.abspath(os.path.dirname(__file__)), config)
 
     config = Config(config)
 

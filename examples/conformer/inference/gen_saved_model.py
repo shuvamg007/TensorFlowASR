@@ -20,7 +20,7 @@ from tensorflow_asr.utils import env_util
 logger = env_util.setup_environment()
 import tensorflow as tf
 
-DEFAULT_YAML = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
+DEFAULT_YAML = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../config.yml")
 
 
 from tensorflow_asr.configs.config import Config
@@ -32,7 +32,7 @@ def main(
     config: str = DEFAULT_YAML,
     h5: str = None,
     sentence_piece: bool = False,
-    subwords: bool = False,
+    subwords: bool = True,
     output_dir: str = None,
 ):
     assert h5 and output_dir
