@@ -86,7 +86,7 @@ learning_config:
   eval_dataset_config:
     use_tf: True
     data_paths:
-      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/dev-clean/transcripts_q.tsv
+      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/dev-clean/transcripts.tsv
     tfrecords_dir: null
     shuffle: False
     cache: True

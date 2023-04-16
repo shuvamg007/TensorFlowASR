@@ -15,10 +15,18 @@
 import os
 import fire
 import math
+import tensorflow as tf
+
+from seed_utils import set_global_determinism
+
+SEED = 8443
+set_global_determinism(SEED)
+
+
 from tensorflow_asr.utils import env_util
 
 logger = env_util.setup_environment()
-import tensorflow as tf
+from config_gen import get_config
 
 from tensorflow_asr.configs.config import Config
 from tensorflow_asr.helpers import featurizer_helpers, dataset_helpers
@@ -34,6 +42,13 @@ def main(
     tfrecords: bool = False,
     sentence_piece: bool = False,
     subwords: bool = True,
+    filters: int = None,
+    dim: int = None,
+    blocks: int = None,
+    heads: int = None,
+    epochs: int = None,
+    reduce_train: bool = False,
+    reduce_eval: bool = False,
     bs: int = None,
     spx: int = 1,
     metadata: str = None,
@@ -47,6 +62,8 @@ def main(
     strategy = env_util.setup_strategy(devices)
     config = os.path.join(os.path.abspath(os.path.dirname(__file__)), config)
 
+    config = get_config(config, filters, dim, blocks, heads, \
+                        epochs, bs, reduce_train, reduce_eval)
     config = Config(config)
 
     speech_featurizer, text_featurizer = featurizer_helpers.prepare_featurizers(
